@@ -20,7 +20,7 @@ def get_api_response(prompt: str) -> str | None:
             },
             {
               "role": "user",
-              "content": "Hello"
+              "content": prompt  # Use the provided prompt here
             }
           ],
           temperature=0.9,
@@ -30,13 +30,12 @@ def get_api_response(prompt: str) -> str | None:
           presence_penalty=0.6,
           stop=["Human:", "AI:"]
         )
-        
-        choices: dict = response.get('choises')[0]
-        text = choices.get('text')
+        # Access the 'choices' using dot notation
+        text = response.choices[0].message.content
     except Exception as e:
-        print('Error',e)
+        print('Error', e)
         
-        return text
+    return text
 
 def update_list(message: str, pl: list[str]):
   pl.append(message)
