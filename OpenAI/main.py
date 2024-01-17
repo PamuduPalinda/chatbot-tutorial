@@ -1,7 +1,11 @@
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
-with open('OpenAI/hidden.txt') as file:
-    client = OpenAI(api_key=file.read())
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+client = OpenAI(api_key=SECRET_KEY)
         
 def get_api_response(prompt: str) -> str | None:
     text: str | None = None
